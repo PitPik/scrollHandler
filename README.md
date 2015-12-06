@@ -2,7 +2,7 @@
 
 Adding event handlers to the window scroll event is generally not such a good idea. Well, sometimes we do need it for things like lazy loading of images, parallax effects, scroll into view and show, etc. So, if we do, we should use it carefully and smart.
 
-This scroll handler (minifyed 3.57 KB) gives you
+This scroll handler (minified 3.57 KB) gives you
  - smart throttling of event storm
  - caching elements, data, position and states for blasting fast calculations
  - element manipulation only if situation changed (in view port, out of view port)
@@ -11,7 +11,7 @@ This scroll handler (minifyed 3.57 KB) gives you
  - possible callbacks for 'per cycle' calculations / manipulations
  - automatically adds containers if added to the DOM
 
-In the [demo](http://dematte.at/scrollHandler) you can see how to make smooth parallax effects with almost no JS efford and very little DOM tree access.
+In the [demo](http://dematte.at/scrollHandler) you can see how to make smooth parallax effects with almost no JS effort and very little DOM tree access.
 
 ## Usage
 
