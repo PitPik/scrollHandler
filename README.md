@@ -11,7 +11,7 @@ This scroll handler (minifyed 3.57 KB) gives you
  - possible callbacks for 'per cycle' calculations / manipulations
  - automatically adds containers if added to the DOM
 
-See demo [here](http://dematte.at/scrollHandler):
+In the [demo](http://dematte.at/scrollHandler) you can see how to make smooth parallax effects with almost no JS efford and very little DOM tree access.
 
 ## Usage
 
