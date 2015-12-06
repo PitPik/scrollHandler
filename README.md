@@ -79,14 +79,15 @@ container:
     inViewport: true
     left: 100
     options: Object
-    className: "inview"
-    classNameBottom: "inview-bottom"
-    classNameCompletely: "inview-completely"
-    classNameTop: "inview-top"
-    initialClassName: false
-    offsetBottom: 0
-    offsetTop: 0
-    stayInView: false
+        callback: ...
+        className: "inview"
+        classNameBottom: "inview-bottom"
+        classNameCompletely: "inview-completely"
+        classNameTop: "inview-top"
+        initialClassName: false
+        offsetBottom: 0
+        offsetTop: 0
+        stayInView: false
     top: 100
     topInViewport: false
     wasInViewport: true
