@@ -61,8 +61,7 @@
             action(true);
         },
         setScrollData = function(that) {
-            scrollTop = _body.scrollTop ||
-                document.documentElement.scrollTop;
+            scrollTop = _body.scrollTop || document.documentElement.scrollTop;
             scrollBottom = scrollTop + document.documentElement.offsetHeight;
         },
         checkIfInViewport = function(that, force) {
