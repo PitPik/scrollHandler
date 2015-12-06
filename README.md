@@ -4,11 +4,12 @@ Adding event handlers to the window scroll event is generally not such a good id
 
 This scroll handler (minifyed 3.57 KB) gives you
  - smart throttling of event storm
- - caching elements, data and states for blasting fast calculations
- - element manipulation only if situation changed
- - single element manipulation per cycle (minimum DOM-api access)
- - detects change of the DOM-tree for re-calculating positions
+ - caching elements, data, position and states for blasting fast calculations
+ - element manipulation only if situation changed (in view port, out of view port)
+ - one single element manipulation per cycle if needed at all (minimum DOM-api access)
+ - detects changes in view port for re-calculation of container positions
  - possible callbacks for 'per cycle' calculations / manipulations
+ - automatically adds containers if added to the DOM
 
 See demo [here](http://dematte.at/scrollHandler):
 
