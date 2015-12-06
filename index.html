@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=IE7" />
+    <link rel="stylesheet" type="text/css" href="index.css">
+
+    <title>high performance scroll handler</title>
+
+</head>
+<body>
+    <div class="button-wrapper">
+        <button class="action-button js-clone-first">clone first child</button>
+        <button class="action-button js-clone-last">clone last child</button>
+        <button class="action-button js-delete-first">delete first child</button>
+        <button class="action-button js-delete-last">delete last child</button>
+    </div>
+
+    <div class="test-box" data-inview=""></div>
+    <div class="test-box" data-inview="{'stayInView': true, 'callback': 'paralaxCallback'}"><div class="paralax"></div></div>
+    <div class="test-box" data-inview=""></div>
+    <div class="test-box" data-inview=""></div>
+    <div class="test-box" data-inview=""></div>
+    <div class="test-box" data-inview=""></div>
+    <div class="test-box" data-inview=""></div>
+    <div class="test-box" data-inview=""></div>
+    <div class="test-box" data-inview=""></div>
+    <div class="test-box" data-inview=""></div>
+    <div class="test-box" data-inview=""></div>
+
+    <script src="scroll-handler.js"></script>
+    <script type="text/javascript">
+
+        (function() {
+            window.isInViewport = new window.IsInViewport({
+                // dataAttribute: 'data-inview', // is default
+                // className: 'inview', // is default
+                // delay: 40, // 100 is default
+                // offsetTop: -20,
+                // offsetBottom: -20,
+                callback: paralaxCallback
+            });
+
+            /* -------------- callback functions for IsInViewport -------------- */
+            function paralaxCallback(container) {
+                var scrollTop = this.scrollTop,
+                    containerTop = container.top;  
+
+                (container.dotStyle || (container.dotStyle = container.element.firstChild.style)).cssText = 
+                    'transform: translate3d(0, ' + -((scrollTop - containerTop) / 4) + 'px, 0)';
+            }
+
+            // event delegation handler for buttons
+            document.body.addEventListener('click', function(e) {
+                var target = e.target,
+                    className = target.className,
+                    testClass = function(str, className) {
+                        return new RegExp('(?:\\b|\\s+)' + str + '(?:\\s+|\\b)').
+                            test(className);
+                    },
+                    children = {};
+
+                if (testClass('action-button', className)) {
+                    children = document.querySelectorAll('.test-box');
+
+                    if (testClass('js-clone-first', className)) {
+                        children[0].parentNode.insertBefore(
+                            children[0].cloneNode(true), children[0]);
+                    } else if (testClass('js-clone-last', className)) {
+                        children[0].parentNode.appendChild(
+                            children[children.length - 1].cloneNode(true));
+                    } else if (testClass('js-delete-first', className)) {
+                        children[0].parentNode.removeChild(
+                            children[0]);
+                    } else if (testClass('js-delete-last', className)) {
+                        children[0].parentNode.removeChild(
+                            children[children.length - 1]);
+                    }
+                }
+            }, false);
+        })();
+
+    </script>
+</body>
+</html>

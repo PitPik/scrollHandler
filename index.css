@@ -1,0 +1,53 @@
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.button-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.action-button {
+    padding: 8px 12px;
+    margin: 12px 0 12px 12px;
+    font-size: 14px;
+}
+
+.test-box {
+    position: relative;
+    margin: 100px;
+    width: 300px;
+    height: 300px;
+    background-color: #efefef;
+    border: 24px solid gray;
+}
+
+.paralax {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 50%;
+    top: 50%;
+    margin: -10px;
+    border-radius: 50%;
+    background-color: #c00;
+
+    transition: transform .1s ease-out;
+}
+
+.inview {
+	background-color: #00C;
+}
+.inview-top {
+	border-top-color: #C00;
+}
+.inview-bottom {
+	border-bottom-color: #C00;
+}
+.inview-completely {
+	background-color: #0C0;
+}
