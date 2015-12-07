@@ -1,7 +1,9 @@
-;window.IsInViewport = (function(window, undefined) { // 9.51, 3.57, 1.36 KB
+;window.IsInViewport = (function(window, undefined) { // 9.67, 3.56, 1.37 KB
     'use strict';
 
-    var _body = window.document.body,
+    var _document = window.document,
+        _body = _document.body,
+        _documentElement = _document.documentElement,
         _rLimit = '(?:\\s+|\\b)',
         functionTimer = 0,
         scrollTop = 0,
@@ -25,8 +27,11 @@
                         window.setTimeout(action, that.options.delay);
                 },
                 action = function(force) {
+                    var oldScrollTop = scrollTop;
+
                     functionTimer = window.clearTimeout(functionTimer);
                     setScrollData();
+                    that.speed = scrollTop - oldScrollTop;
                     force && that.initContainers(true);
                     that.scrollTop = scrollTop;
                     that.scrollBottom = scrollBottom;
@@ -61,8 +66,8 @@
             action(true);
         },
         setScrollData = function(that) {
-            scrollTop = _body.scrollTop || document.documentElement.scrollTop;
-            scrollBottom = scrollTop + document.documentElement.offsetHeight;
+            scrollTop = _body.scrollTop || _documentElement.scrollTop;
+            scrollBottom = scrollTop + _documentElement.offsetHeight;
         },
         checkIfInViewport = function(that, force) {
             var container = {},

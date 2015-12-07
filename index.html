@@ -18,10 +18,10 @@
 
     <div class="test-box" data-inview=""></div>
     <div class="test-box" data-inview="{'callback': 'paralaxCallback'}"><div class="paralax"></div></div>
-    <div class="test-box show-me" data-inview=""><div class="paralax"></div></div>
+    <div class="test-box show-me" data-inview=""><div class="zoom"></div></div>
     <div class="test-box" data-inview="{'callback': 'rotate'}"><div class="rotate"></div></div>
     <div class="test-box" data-inview="{'stayInView': true, 'offsetTop': -150, 'offsetBottom': -150}"><div class="stay">I stay here</div></div>
-    <div class="test-box" data-inview=""></div>
+    <div class="test-box scale" data-inview="{'callback': 'growWithSpeed', 'offsetTop': 150, 'offsetBottom': 150}"><div class="rotate"></div></div>
     <div class="test-box" data-inview=""></div>
     <div class="test-box" data-inview=""></div>
     <div class="test-box" data-inview=""></div>
@@ -38,7 +38,7 @@
                 // delay: 40, // 100 is default
                 // offsetTop: -20,
                 // offsetBottom: -20,
-                callback: [paralaxCallback, rotate]
+                callback: [paralaxCallback, rotate, growWithSpeed]
             });
 
             /* -------------- callback functions for IsInViewport -------------- */
@@ -56,6 +56,11 @@
 
                 (container.rotateStyle || (container.rotateStyle = container.element.firstChild.style)).cssText = 
                     'transform: rotate(' + ((scrollTop - containerTop) / 8) + 'deg)';
+            }
+
+            function growWithSpeed(container) {
+                (container.growStyle || (container.growStyle = container.element.firstChild.style)).cssText = 
+                    'transform: scale(' + (1 + (this.speed / 500)) + ')';
             }
 
             // event delegation handler for buttons

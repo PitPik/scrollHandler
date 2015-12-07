@@ -63,7 +63,8 @@ myScroll:
         offsetTop: 0
         watchTimer: 100
     scrollBottom: 1000
-    scrollTop: 0
+    scrollTop: 0,
+    speed: 0,
     __proto__:
         addCallback: (callback)
         initContainers: (force) // force triggers new calculations and new collection
