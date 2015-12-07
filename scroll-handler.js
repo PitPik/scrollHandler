@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 9.67, 3.56, 1.37 KB
+;window.IsInViewport = (function(window, undefined) { // 9.99, 3.62, 1.39 KB
     'use strict';
 
     var _document = window.document,
@@ -73,24 +73,27 @@
             var container = {},
                 options = {},
                 className = '',
+                element = {},
                 inViewport = false,
                 topInViewport = false,
                 middleInViewport = false,
                 bottomInViewport = false,
                 completelyInViewport = false,
-                isOldStatus = false;
+                isOldStatus = false,
+                gotClassName = false;
 
             for (var n = 0, m = that.container.length; n < m; n++) {
                 container = that.container[n];
+                element = container.element,
                 options = container.options;
-                className = container.element.className || '';
+                gotClassName = false;
 
-                topInViewport = container.deltaTop < scrollBottom &&
-                    container.deltaTop > scrollTop;
-                middleInViewport = container.deltaTop < scrollTop &&
-                    container.deltaBottom > scrollBottom;
-                bottomInViewport = container.deltaBottom < scrollBottom &&
-                    container.deltaBottom > scrollTop;
+                topInViewport = container.deltaTop <= scrollBottom &&
+                    container.deltaTop >= scrollTop;
+                middleInViewport = container.deltaTop <= scrollTop &&
+                    container.deltaBottom >= scrollBottom;
+                bottomInViewport = container.deltaBottom <= scrollBottom &&
+                    container.deltaBottom >= scrollTop;
                 inViewport = topInViewport || bottomInViewport || middleInViewport;
                 completelyInViewport = topInViewport && bottomInViewport;
 
@@ -101,13 +104,17 @@
                     container.completelyInViewport === completelyInViewport;
 
                 if (force || (!inViewport && !isOldStatus)) {
-                    className = className.replace(new RegExp(
+                    className = element.className.replace(new RegExp(
                         _rLimit + options.className + '(?:-\\w+)' +
                             (options.stayInView && container.wasInViewport ?
                                 '+' : '*'), 'g'), '');
+                    gotClassName = true;
                 }
 
                 if (inViewport) {
+                    !gotClassName && (className = element.className);
+                    gotClassName = true;
+
                     if (!container.inViewport) {
                         className += container.wasInViewport && options.stayInView ? '' :
                             (className ? ' ' : '') + options.className;
@@ -131,12 +138,13 @@
                 }
 
                 if (!isOldStatus) {
+                    !gotClassName && (className = element.className);
                     container.inViewport = inViewport;
                     container.topInViewport = topInViewport;
                     container.bottomInViewport = bottomInViewport;
                     container.completelyInViewport = completelyInViewport;
 
-                    container.element.className = className;
+                    element.className = className;
                 }
 
                 if (inViewport && options.callback && that.callbacks[options.callback]) {
