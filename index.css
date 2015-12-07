@@ -46,6 +46,47 @@ html, body {
     transform: scale(4);
 }
 
+.rotate {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    left: 50%;
+    top: 50%;
+    margin: -70px;
+    background-color: #c00;
+    border: 6px solid gray;
+    border-radius: 6px;
+    box-sizing: border-box;
+
+    transition: transform .1s ease-out;
+}
+
+.inview:not(.inview-completely) .rotate {
+    background-color: #0c0;
+}
+
+.stay {
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    top: 50%;
+    margin-top: -5%;
+    text-align: center;
+    line-height: 2;
+    font-family: Verdana;
+    color: white;
+    transform: scale(3);
+    transition: transform .5s ease-out;
+}
+
+.test-box:not(.inview) .stay {
+    transform: scale(0);
+}
+
+.inview-completely .stay {
+    color: black;
+}
+
 .inview {
 	background-color: #00C;
 }

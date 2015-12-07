@@ -17,10 +17,10 @@
     </div>
 
     <div class="test-box" data-inview=""></div>
-    <div class="test-box" data-inview="{'stayInView': true, 'callback': 'paralaxCallback'}"><div class="paralax"></div></div>
+    <div class="test-box" data-inview="{'callback': 'paralaxCallback'}"><div class="paralax"></div></div>
     <div class="test-box show-me" data-inview=""><div class="paralax"></div></div>
-    <div class="test-box" data-inview=""></div>
-    <div class="test-box" data-inview=""></div>
+    <div class="test-box" data-inview="{'callback': 'rotate'}"><div class="rotate"></div></div>
+    <div class="test-box" data-inview="{'stayInView': true, 'offsetTop': -150, 'offsetBottom': -150}"><div class="stay">I stay here</div></div>
     <div class="test-box" data-inview=""></div>
     <div class="test-box" data-inview=""></div>
     <div class="test-box" data-inview=""></div>
@@ -38,7 +38,7 @@
                 // delay: 40, // 100 is default
                 // offsetTop: -20,
                 // offsetBottom: -20,
-                callback: paralaxCallback
+                callback: [paralaxCallback, rotate]
             });
 
             /* -------------- callback functions for IsInViewport -------------- */
@@ -48,6 +48,14 @@
 
                 (container.dotStyle || (container.dotStyle = container.element.firstChild.style)).cssText = 
                     'transform: translate3d(0, ' + -((scrollTop - containerTop) / 4) + 'px, 0)';
+            }
+
+            function rotate(container) {
+                var scrollTop = this.scrollTop,
+                    containerTop = container.top;  
+
+                (container.rotateStyle || (container.rotateStyle = container.element.firstChild.style)).cssText = 
+                    'transform: rotate(' + ((scrollTop - containerTop) / 8) + 'deg)';
             }
 
             // event delegation handler for buttons
