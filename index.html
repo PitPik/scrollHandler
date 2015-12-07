@@ -21,7 +21,7 @@
     <div class="test-box show-me" data-inview=""><div class="zoom"></div></div>
     <div class="test-box" data-inview="{'callback': 'rotate'}"><div class="rotate"></div></div>
     <div class="test-box" data-inview="{'stayInView': true, 'offsetTop': -150, 'offsetBottom': -150}"><div class="stay">I stay here</div></div>
-    <div class="test-box scale" data-inview="{'callback': 'growWithSpeed', 'offsetTop': 150, 'offsetBottom': 150}"><div class="rotate"></div></div>
+    <div class="test-box scale" data-inview="{'callback': 'growWithSpeed'}"><div class="rotate"></div></div>
     <div class="test-box" data-inview=""></div>
     <div class="test-box" data-inview=""></div>
     <div class="test-box" data-inview=""></div>
@@ -60,7 +60,7 @@
 
             function growWithSpeed(container) {
                 (container.growStyle || (container.growStyle = container.element.firstChild.style)).cssText = 
-                    'transform: scale(' + (1 + (this.speed / 500)) + ')';
+                    !container.inViewport ? '' : 'transform: scale(' + (1 + (this.speed / 500)) + ')';
             }
 
             // event delegation handler for buttons

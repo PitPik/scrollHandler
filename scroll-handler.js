@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 9.89, 3.60, 1.39 KB
+;window.IsInViewport = (function(window, undefined) { // 9.93, 3.61, 1.40 KB
     'use strict';
 
     var _document = window.document,
@@ -145,7 +145,8 @@
                     element.className = className;
                 }
 
-                if (inViewport && options.callback && that.callbacks[options.callback]) {
+                if ((inViewport || !isOldStatus) &&
+                        options.callback && that.callbacks[options.callback]) {
                     that.callbacks[options.callback].call(that, container);
                 }
             }
