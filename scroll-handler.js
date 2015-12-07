@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 9.92, 3.60, 1.39 KB
+;window.IsInViewport = (function(window, undefined) { // 9.89, 3.60, 1.39 KB
     'use strict';
 
     var _document = window.document,
@@ -111,9 +111,8 @@
                     gotClassName = true;
                 }
 
-                if (inViewport) {
+                if (inViewport && !isOldStatus) {
                     !gotClassName && (className = element.className);
-                    gotClassName = true;
 
                     if (!container.inViewport) {
                         className += container.wasInViewport && options.stayInView ? '' :
