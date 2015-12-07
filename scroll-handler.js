@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 9.99, 3.62, 1.39 KB
+;window.IsInViewport = (function(window, undefined) { // 9.92, 3.60, 1.39 KB
     'use strict';
 
     var _document = window.document,
@@ -138,7 +138,6 @@
                 }
 
                 if (!isOldStatus) {
-                    !gotClassName && (className = element.className);
                     container.inViewport = inViewport;
                     container.topInViewport = topInViewport;
                     container.bottomInViewport = bottomInViewport;
