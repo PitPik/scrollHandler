@@ -23,13 +23,13 @@ var myScroll = new IsInViewport();
 if you'd like to overwrite some default options then send them with it:
 ```javascript
 var myScroll = new IsInViewport({
-        dataAttribute: 'data-inview', // data attribute with options
-        className: 'inview', // class name give if in view (+ additional)
-        offsetTop: 0, // top offset when scroll handler should trigger
+        dataAttribute: 'data-inview', // name of data attribute (with options)
+        className: 'inview', // class name given if in view (+ additional)
+        offsetTop: 0, // top offset when scroll handler should trigger (negative possible)
         offsetBottom: 0, // same as above just with bottom
-        delay: 100, // throttling of events (events happen ~16ms)
-        watchTimer: 100 // time in ms how often script should look for DOM change
-        callback: function someEffect() {} // callback for every cycle; default is none
+        delay: 100, // throttling of events (events happen by default every ~16ms)
+        watchTimer: 100 // time in ms how often script should look for DOM change (0 = disabled)
+        callback: function someEffect() {} // callback for every cycle; default is none (only provision)
     });
 ```
 
@@ -39,7 +39,9 @@ In your HTML you might have containers you'd like to watch while scrolling that 
 <div class="some-class" data-inview="{'stayInView': true, 'callback': 'paralaxCallback'}">...</div>
 ```
 
-As you can see, with the second container we set some more individual options. They are the same kind as the above ones, it just overwrites the global ones for this item. ```callback``` ```stayInView``` are the only exceptions. The global ```callback``` doesn't fire by default, only if it's explicitly set in the data attribute. ```stayInView``` means that the default class name given if this container was in your view port already will stay, even if it scrolls out of the view port.
+As you can see, with the second container we set some more individual options. They are the same kind as those above, it just overwrites the global ones for this item. ```callback``` ```stayInView``` are the only exceptions:
+ * The global ```callback``` doesn't fire by default, only if it's explicitly set in the data attribute.
+ * ```stayInView``` means that the default class name given if this container was in your view port already will stay, even if it scrolls out of the view port.
 
 Now, if your containers get scrolled into view, they automatically get some class names: ```inview``` (as set in options), ```inview-top```, ```inview-bottom```, ```inview-completely```. In your css you now can make your styling, even transitions (maybe use :not()) and use the callback for some extra stuff you want to do (like lazy load images, ...)
 
