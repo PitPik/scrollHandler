@@ -1,14 +1,13 @@
-;window.IsInViewport = (function(window, undefined) { // 9.93, 3.61, 1.40 KB
+;window.IsInViewport = (function(window, undefined) { // 9.92, 3.61, 1.40 KB
     'use strict';
 
-    var _document = window.document,
-        _body = _document.body,
-        _documentElement = _document.documentElement,
+    var _document,
+        _body,
         _rLimit = '(?:\\s+|\\b)',
         functionTimer = 0,
         scrollTop = 0,
         scrollBottom = 0,
-        scrollHeight = _body.scrollHeight,
+        scrollHeight = 0,
         IsInViewport = function(options) {
             this.options = {
                 dataAttribute: 'data-inview',
@@ -38,6 +37,9 @@
                     checkIfInViewport(that, force);
                 };
 
+            _document = window.document;
+            _body = _document.body;
+
             that.callbacks = [];
             // that.container = [];
             // that.elements = [];
@@ -66,8 +68,8 @@
             action(true);
         },
         setScrollData = function(that) {
-            scrollTop = _body.scrollTop || _documentElement.scrollTop;
-            scrollBottom = scrollTop + _documentElement.offsetHeight;
+            scrollTop = _body.scrollTop || _document.documentElement.scrollTop;
+            scrollBottom = scrollTop + _document.documentElement.offsetHeight;
         },
         checkIfInViewport = function(that, force) {
             var container = {},
