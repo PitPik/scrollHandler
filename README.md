@@ -2,7 +2,7 @@
 
 Adding event handlers to the window scroll event is generally not such a good idea. Well, sometimes we do need it for things like lazy loading of images, parallax effects, scroll into view and show, etc. So, if we do, we should use it carefully and smart.
 
-This scroll handler (minified 3.61 KB) gives you
+This scroll handler (minified 3.67 KB) gives you
  - smart throttling of event storm
  - caching elements, data, position and states for blasting fast calculations
  - element manipulation only if situation changed (in view port, out of view port)

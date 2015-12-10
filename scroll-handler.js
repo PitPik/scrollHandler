@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 9.92, 3.61, 1.40 KB
+;window.IsInViewport = (function(window, undefined) { // 10.11, 3.67, 1.41 KB
     'use strict';
 
     var _document,
@@ -61,7 +61,10 @@
             that.options.watchTimer && window.setInterval(function() {
                 if (_body.scrollHeight !== scrollHeight) {
                     scrollHeight = _body.scrollHeight;
-                    action(true);
+                    window.clearTimeout(functionTimer); // throttle action
+                    functionTimer = window.setTimeout(function() {
+                        action(true);
+                    }, that.options.delay);
                 }
             }, that.options.watchTimer);
 
