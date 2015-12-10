@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 10.11, 3.67, 1.41 KB
+;window.IsInViewport = (function(window, undefined) { // 10.12, 3.68, 1.41 KB
     'use strict';
 
     var _document,
@@ -64,7 +64,7 @@
                     window.clearTimeout(functionTimer); // throttle action
                     functionTimer = window.setTimeout(function() {
                         action(true);
-                    }, that.options.delay);
+                    }, that.options.watchTimer + 1);
                 }
             }, that.options.watchTimer);
 
