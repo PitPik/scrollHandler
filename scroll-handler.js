@@ -213,12 +213,12 @@
 
     IsInViewport.prototype.addCallback = function(callback) {
         if (!this.callbacks[callback.name]) {
-            this.callbacks[callback.name] = callback;
+            this.callbacks[callback.name] = callback.callback;
         }
     };
 
     IsInViewport.prototype.removeCallback = function(callback) {
-        delete this.callbacks[callback.name];
+        callback.name ? delete this.callbacks[callback.name] : delete this.callbacks[callback];
     };
 
     function getOrigin(elm) {

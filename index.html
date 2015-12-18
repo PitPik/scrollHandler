@@ -38,7 +38,11 @@
                 // delay: 40, // 100 is default
                 // offsetTop: -20,
                 // offsetBottom: -20,
-                callback: [paralaxCallback, rotate, growWithSpeed]
+                callback: [
+                    {name: 'paralaxCallback', callback: paralaxCallback},
+                    {name: 'rotate', callback: rotate},
+                    {name: 'growWithSpeed', callback: growWithSpeed}
+                ]
             });
 
             /* -------------- callback functions for IsInViewport -------------- */
