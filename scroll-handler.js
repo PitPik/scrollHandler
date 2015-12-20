@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 10.16, 3.68, 1.42 KB
+;window.IsInViewport = (function(window, undefined) { // 9.89, 3.59, 1.38 KB
     'use strict';
 
     var _document,
@@ -46,11 +46,7 @@
 
             for (var option in options) {
                 if (option === 'callback') {
-                    option = typeof options[option] === 'function' ?
-                        [options[option]] : options[option];
-                    for (var n = option.length; n--; ) {
-                        that.addCallback(option[n]);
-                    }
+                    that.addCallback(options[option]);
                 } else {
                     that.options[option] = options[option];
                 }
@@ -213,9 +209,7 @@
 
     IsInViewport.prototype.addCallback = function(callbacks) {
         for (var n in callbacks) {
-            if (!this.callbacks[n]) {
-                this.callbacks[n] = callbacks[n];
-            }
+            this.callbacks[n] = callbacks[n];
         }
     };
 
