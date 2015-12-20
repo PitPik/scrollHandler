@@ -29,7 +29,7 @@ var myScroll = new IsInViewport({
         offsetBottom: 0, // same as above just with bottom
         delay: 100, // throttling of events (events happen by default every ~16ms)
         watchTimer: 100 // time in ms how often script should look for DOM change (0 = disabled)
-        callback: [{'myCallbackName': function() {}}, ..] // callback for every cycle; default is none (only provision)
+        callback: {'myCallbackName': function() {}, ...} // callback for every cycle; default is none (only provision)
     });
 ```
 
