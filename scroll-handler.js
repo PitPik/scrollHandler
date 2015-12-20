@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 10.12, 3.68, 1.41 KB
+;window.IsInViewport = (function(window, undefined) { // 10.16, 3.68, 1.42 KB
     'use strict';
 
     var _document,
@@ -211,14 +211,16 @@
         }
     };
 
-    IsInViewport.prototype.addCallback = function(callback) {
-        if (!this.callbacks[callback.name]) {
-            this.callbacks[callback.name] = callback.callback;
+    IsInViewport.prototype.addCallback = function(callbacks) {
+        for (var n in callbacks) {
+            if (!this.callbacks[n]) {
+                this.callbacks[n] = callbacks[n];
+            }
         }
     };
 
     IsInViewport.prototype.removeCallback = function(callback) {
-        callback.name ? delete this.callbacks[callback.name] : delete this.callbacks[callback];
+        delete this.callbacks[callback];
     };
 
     function getOrigin(elm) {
