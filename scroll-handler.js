@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 9.89, 3.59, 1.38 KB
+;window.IsInViewport = (function(window, undefined) { // 9.90, 3.59, 1.38 KB
     'use strict';
 
     var _document,
@@ -16,7 +16,7 @@
                 offsetBottom: 0,
                 delay: 100,
                 watchTimer: 100
-                // callback: [] // or function
+                // callback: {'some': function(){}, ...}
             };
             initMe(this, options || {});
         },
@@ -40,7 +40,7 @@
             _document = window.document;
             _body = _document.body;
 
-            that.callbacks = [];
+            that.callbacks = {};
             // that.container = [];
             // that.elements = [];
 
