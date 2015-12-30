@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 9.90, 3.59, 1.38 KB
+;window.IsInViewport = (function(window, undefined) { // 10.39, 3.69, 1.42 KB
     'use strict';
 
     var _document,
