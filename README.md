@@ -6,6 +6,7 @@ This scroll handler (minified 3.59 KB) gives you
  - smart throttling of event storm
  - caching elements, data, position and states for blasting fast calculations
  - element manipulation only if situation changed (in view port, out of view port)
+ - requestAnimationFrame support
  - one single element manipulation per cycle if needed at all (minimum DOM-api access)
  - detects changes in view port for re-calculation of container positions
  - possible callbacks for 'per cycle' calculations / manipulations
