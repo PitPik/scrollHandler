@@ -4,6 +4,8 @@
     var _document,
         _body,
         _rLimit = '(?:\\s+|\\b)',
+        _animate = window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame || function(cb){cb()},
         functionTimer = 0,
         scrollTop = 0,
         scrollBottom = 0,
@@ -23,7 +25,13 @@
         initMe = function(that, options) {
             var timeoutCallback = function(e) {
                     functionTimer = functionTimer ||
-                        window.setTimeout(action, that.options.delay);
+                        window.setTimeout(
+                            // window.requestAnimationFrame(action),
+                            action,
+                            that.options.delay);
+                },
+                RAFCallback = function() {
+                    checkIfInViewport(that);
                 },
                 action = function(force) {
                     var oldScrollTop = scrollTop;
@@ -34,7 +42,11 @@
                     force && that.initContainers(true);
                     that.scrollTop = scrollTop;
                     that.scrollBottom = scrollBottom;
-                    checkIfInViewport(that, force);
+                    if (force) {
+                        checkIfInViewport(that, force);
+                    } else {
+                        _animate(RAFCallback);
+                    }
                 };
 
             _document = window.document;
