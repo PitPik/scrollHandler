@@ -44,7 +44,7 @@ As you can see, with the second container we set some more individual options. T
  * The global ```callback``` doesn't fire by default, only if it's explicitly set in the data attribute.
  * ```stayInView``` means that the default class name given if this container was in your view port already will stay, even if it scrolls out of the view port.
 
-Now, if your containers get scrolled into view, they automatically get some class names: ```inview``` (as set in options), ```inview-top```, ```inview-bottom```, ```inview-completely```. In your css you now can make your styling, even transitions (maybe use :not()) and use the callback for some extra stuff you want to do (like lazy load images, ...)
+Now, if your containers get scrolled into view, they automatically get some class names: ```inview``` (as set in options), ```inview-top```, ```inview-bottom```, ```inview-completely```. In your css you now can make your styling, even transitions (maybe use :not()) and use the callback for some extra stuff you want to do (like lazy load images, ...). Be aware that you can only use one ```callback``` per element (container data attribute). If you need to call more then one then call others from within this single callback function.
 
 **NOTE**: ```IsInViewport``` works best if used as a singleton. If you need to install more than one, then make sure that the option ```dataAttribute: 'data-inview'```is named differently (for example ```data-inview2```), otherwise both instances work on the same elements multiple times.
 
