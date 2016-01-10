@@ -61,9 +61,9 @@ myScroll:
     options: 
         className: "inview" // className and prefix for classNames
         dataAttribute: "data-inview" // data attribute to look for container options
-        delay: 100 // skips scroll events and calculates every x ms
-        offsetBottom: 0 // action offset
-        offsetTop: 0
+        delay: 100 // skips scroll events and calculates every x ms instead
+        offsetBottom: 0 // action offset (like a delay for actions to take place)
+        offsetTop: 0 // as above
         watchTimer: 100 // looks for resize / orientation change every x ms; is optimized
         requestAnimationFrame: true // use requestAnimationFrame or just timeout
     scrollBottom: 1000 // srollTop + screehnHeight
@@ -78,15 +78,15 @@ myScroll:
 The callback delivers some information of the current container (besides the instance itself with ```this```):
 ```HTML
 container:
-    bottom: 448
+    bottom: 448 // bottom of container (relative to document)
     bottomInViewport: true
     completelyInViewport: false
-    deltaBottom: 448
-    deltaTop: 100
+    deltaBottom: 448 // different from bottom if options.offsetBottom
+    deltaTop: 100 // see above
     element: div.some-class
-    height: 348
+    height: 348 // of container
     inViewport: true
-    left: 100
+    left: 100 // relative to document
     options: Object
         callback: ...
         className: "inview"
@@ -97,7 +97,7 @@ container:
         offsetBottom: 0
         offsetTop: 0
         stayInView: false
-    top: 100
+    top: 100 // relative to document
     topInViewport: false
     wasInViewport: true
 ```
