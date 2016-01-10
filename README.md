@@ -13,7 +13,7 @@ This scroll handler (minified 3.75 KB / 1.43 KB gZip) gives you
  - possible callbacks for 'per cycle' calculations / manipulations
  - automatically adds containers if added to the DOM
 
-In the [demo](http://dematte.at/scrollHandler) you can see how to make smooth parallax effects with almost no JS effort and very little DOM tree access.
+In the [demo](http://dematte.at/scrollHandler) you can see how to make smooth parallax effects with almost no JS effort and very little DOM tree access. You'll also see that, for example in the paralaxCallback function, we set the translateY value every 100ms (time is set by option) and use css's transition: transform .1s ease-out; to make it a smooth animation. This way the browser has to do all the animations and that's way faster then doing it in javaScript. The fact that MS stopped supporting IE8, 9, 10 so we now can use transitions makes this a future-oriented technique for fast and smooth scrolling effects.
 
 ## Usage
 
