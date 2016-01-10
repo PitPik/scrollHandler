@@ -52,7 +52,7 @@
                     containerTop = container.top;  
 
                 (container.dotStyle || (container.dotStyle = container.element.firstChild.style)).cssText = 
-                    'transform: translate3d(0, ' + -((scrollTop - containerTop) / 4) + 'px, 0)';
+                    'transform: translate3d(0, ' + -((scrollTop - containerTop + container.height) / 4) + 'px, 0)';
             }
 
             function rotate(container) {
