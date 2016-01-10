@@ -25,6 +25,7 @@ html, body {
     background-color: #efefef;
     border: 24px solid gray;
     border-radius: 35px;
+    will-change: transform;
 }
 
 .paralax, .zoom {

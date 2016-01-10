@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 10.39, 3.69, 1.42 KB
+;window.IsInViewport = (function(window, undefined) { // 10.53, 3.75, 1.43 KB
     'use strict';
 
     var _document,
@@ -17,7 +17,8 @@
                 offsetTop: 0,
                 offsetBottom: 0,
                 delay: 100,
-                watchTimer: 100
+                watchTimer: 100,
+                requestAnimationFrame: true
                 // callback: {'some': function(){}, ...}
             };
             initMe(this, options || {});
@@ -45,7 +46,8 @@
                     if (force) {
                         checkIfInViewport(that, force);
                     } else {
-                        _animate(RAFCallback);
+                        that.options.requestAnimationFrame ?
+                            _animate(RAFCallback) : checkIfInViewport(that);
                     }
                 };
 

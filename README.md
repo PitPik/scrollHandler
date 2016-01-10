@@ -2,11 +2,12 @@
 
 Adding event handlers to the window scroll event is generally not such a good idea. Well, sometimes we do need it for things like lazy loading of images, parallax effects, scroll into view and show, etc. So, if we do, we should use it carefully and smart.
 
-This scroll handler (minified 3.69 KB) gives you
+This scroll handler (minified 3.75 KB / 1.43 KB gZip) gives you
  - smart throttling of event storm
  - caching elements, data, position and states for blasting fast calculations
  - element manipulation only if situation changed (in view port, out of view port)
- - requestAnimationFrame support
+ - requestAnimationFrame support; can be turned off if needed (for event handling in callbacks)
+ - automatically skips manipulation of containers that are not in view port
  - one single element manipulation per cycle if needed at all (minimum DOM-api access)
  - detects changes in view port for re-calculation of container positions
  - possible callbacks for 'per cycle' calculations / manipulations
@@ -30,6 +31,7 @@ var myScroll = new IsInViewport({
         offsetBottom: 0, // same as above just with bottom
         delay: 100, // throttling of events (events happen by default every ~16ms)
         watchTimer: 100 // time in ms how often script should look for DOM change (0 = disabled)
+        requestAnimationFrame: true // switch for requestAnimationFrame; disable to avoid unecpected delays for events
         callback: {'myCallbackName': function() {}, ...} // callback for every cycle; default is none (only provision)
     });
 ```
@@ -53,19 +55,20 @@ Now, if your containers get scrolled into view, they automatically get some clas
 The following properties can be found when inspecting the instance. This will also be delivered in callback functions as ```this``` besides ```container``` (see below).
 ```HTML
 myScroll:
-    callbacks: Array
-    container: Array
-    elements: NodeList
+    callbacks: Object // with name of callback as key
+    container: Array // all the registered containers
+    elements: NodeList // cache for internal use
     options: 
-        className: "inview"
-        dataAttribute: "data-inview"
-        delay: 100
-        offsetBottom: 0
+        className: "inview" // className and prefix for classNames
+        dataAttribute: "data-inview" // data attribute to look for container options
+        delay: 100 // skips scroll events and calculates every x ms
+        offsetBottom: 0 // action offset
         offsetTop: 0
-        watchTimer: 100
-    scrollBottom: 1000
+        watchTimer: 100 // looks for resize / orientation change every x ms; is optimized
+        requestAnimationFrame: true // use requestAnimationFrame or just timeout
+    scrollBottom: 1000 // srollTop + screehnHeight
     scrollTop: 0,
-    speed: 0,
+    speed: 0, // last mesured speed
     __proto__:
         addCallback: (callback) // {'myCallback': function(){}}
         initContainers: (force) // force triggers new calculations and new collection
