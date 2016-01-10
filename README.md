@@ -75,7 +75,7 @@ myScroll:
         removeCallback: (callbackName) // 'myCallback'
 ```
 
-The callback delivers some information of the current container:
+The callback delivers some information of the current container (besides the instance itself with ```this```):
 ```HTML
 container:
     bottom: 448
