@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 10.53, 3.75, 1.43 KB
+;window.IsInViewport = (function(window, undefined) { // 10.68, 3.80, 1.45 KB
     'use strict';
 
     var _document,
@@ -89,6 +89,7 @@
                 options = {},
                 className = '',
                 element = {},
+                isVisible = false,
                 inViewport = false,
                 topInViewport = false,
                 middleInViewport = false,
@@ -103,13 +104,15 @@
                 options = container.options;
                 gotClassName = false;
 
+                isVisible = !!(element.offsetWidth || element.offsetHeight);
                 topInViewport = container.deltaTop <= scrollBottom &&
                     container.deltaTop >= scrollTop;
                 middleInViewport = container.deltaTop <= scrollTop &&
                     container.deltaBottom >= scrollBottom;
                 bottomInViewport = container.deltaBottom <= scrollBottom &&
                     container.deltaBottom >= scrollTop;
-                inViewport = topInViewport || bottomInViewport || middleInViewport;
+                inViewport = isVisible &&
+                    (topInViewport || bottomInViewport || middleInViewport);
                 completelyInViewport = topInViewport && bottomInViewport;
 
                 isOldStatus =
