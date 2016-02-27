@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 10.68, 3.80, 1.45 KB
+;window.IsInViewport = (function(window, undefined) { // 10.65, 3.71, 1.45 KB
     'use strict';
 
     var _document,
@@ -171,7 +171,8 @@
         };
 
     IsInViewport.prototype.initContainers = function(force) {
-        var data = {},
+        var elements = [],
+            data = {},
             origin = {},
             height = 0,
             className = '',
@@ -180,14 +181,13 @@
 
         if (force) {
             this.container = [];
-            this.elements = _body.querySelectorAll(
-                '['+ options.dataAttribute +']');
+            elements = _body.querySelectorAll('['+ options.dataAttribute +']');
         }
 
-        for (var n = 0, m = this.elements.length; n < m; n++) {
-            className = this.elements[n].className;
+        for (var n = 0, m = elements.length; n < m; n++) {
+            className = elements[n].className;
 
-            data = JSON.parse(this.elements[n].getAttribute(
+            data = JSON.parse(elements[n].getAttribute(
                 options.dataAttribute).replace(/'/g, '"') || '{}');
             data.offsetTop = data.offsetTop !== undefined ?
                 +data.offsetTop : options.offsetTop;
@@ -201,12 +201,12 @@
             data.classNameBottom = data.className + '-bottom';
             data.classNameCompletely = data.className + '-completely';
 
-            origin = getOrigin(this.elements[n]);
-            height = this.elements[n].offsetHeight;
+            origin = getOrigin(elements[n]);
+            height = elements[n].offsetHeight;
 
             container = this.container[n] = this.container[n] || {};
 
-            container.element = this.elements[n];
+            container.element = elements[n];
             container.options = data;
             container.top = origin.top;
             container.bottom = origin.top + height;
@@ -218,7 +218,7 @@
                 new RegExp(_rLimit + options.className + _rLimit).test(className);
 
             if (data.initialClassName) {
-                this.elements[n].className = className + (className ? ' ' : '') +
+                elements[n].className = className + (className ? ' ' : '') +
                     data.initialClassName;
             }
         }
