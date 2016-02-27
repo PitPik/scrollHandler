@@ -25,6 +25,7 @@ var myScroll = new IsInViewport();
 if you'd like to overwrite some default options then send them with it:
 ```javascript
 var myScroll = new IsInViewport({
+        scrollElement: window, // the element the scrollHandler should listen to and calculations are done
         dataAttribute: 'data-inview', // name of data attribute (with options)
         className: 'inview', // class name given if in view (+ additional)
         offsetTop: 0, // top offset when scroll handler should trigger (negative possible)

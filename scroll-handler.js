@@ -1,4 +1,4 @@
-;window.IsInViewport = (function(window, undefined) { // 10.65, 3.71, 1.45 KB
+;window.IsInViewport = (function(window, undefined) { // 11.12, 3.95, 1.51 KB
     'use strict';
 
     var _document,
@@ -10,8 +10,10 @@
         scrollTop = 0,
         scrollBottom = 0,
         scrollHeight = 0,
+        scrollElementOffset = {},
         IsInViewport = function(options) {
             this.options = {
+                scrollElement: window,
                 dataAttribute: 'data-inview',
                 className: 'inview',
                 offsetTop: 0,
@@ -38,7 +40,9 @@
                     var oldScrollTop = scrollTop;
 
                     functionTimer = window.clearTimeout(functionTimer);
-                    setScrollData();
+                    scrollElementOffset = that.options.scrollElement === window ?
+                        {top: 0} : getOrigin(that.options.scrollElement);
+                    setScrollData(that);
                     that.speed = scrollTop - oldScrollTop;
                     force && that.initContainers(true);
                     that.scrollTop = scrollTop;
@@ -56,7 +60,6 @@
 
             that.callbacks = {};
             // that.container = [];
-            // that.elements = [];
 
             for (var option in options) {
                 if (option === 'callback') {
@@ -66,7 +69,7 @@
                 }
             }
 
-            window.addEventListener('scroll', timeoutCallback, false);
+            that.options.scrollElement.addEventListener('scroll', timeoutCallback, false);
             window.addEventListener('resize', timeoutCallback, false);
             that.options.watchTimer && window.setInterval(function() {
                 if (_body.scrollHeight !== scrollHeight) {
@@ -81,8 +84,12 @@
             action(true);
         },
         setScrollData = function(that) {
-            scrollTop = _body.scrollTop || _document.documentElement.scrollTop;
-            scrollBottom = scrollTop + _document.documentElement.offsetHeight;
+            scrollTop = that.options.scrollElement !== window ?
+                that.options.scrollElement.scrollTop + scrollElementOffset.top :
+                _body.scrollTop || _document.documentElement.scrollTop;
+            scrollBottom = scrollTop + (that.options.scrollElement !== window ?
+                that.options.scrollElement.offsetHeight :
+                _document.documentElement.offsetHeight);
         },
         checkIfInViewport = function(that, force) {
             var container = {},
