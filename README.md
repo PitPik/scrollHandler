@@ -31,8 +31,8 @@ var myScroll = new IsInViewport({
         offsetTop: 0, // top offset when scroll handler should trigger (negative possible)
         offsetBottom: 0, // same as above just with bottom
         delay: 100, // throttling of events (events happen by default every ~16ms)
-        watchTimer: 100 // time in ms how often script should look for DOM change (0 = disabled)
-        requestAnimationFrame: true // switch for requestAnimationFrame; disable to avoid unecpected delays for events
+        watchTimer: 100, // time in ms how often script should look for DOM change (0 = disabled)
+        requestAnimationFrame: true, // switch for requestAnimationFrame; disable to avoid unecpected delays for events
         callback: {'myCallbackName': function() {}, ...} // callback for every cycle; default is none (only provision)
     });
 ```
